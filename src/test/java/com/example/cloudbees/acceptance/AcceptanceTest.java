@@ -1,4 +1,4 @@
-package com.example.cloudbees;
+package com.example.cloudbees.acceptance;
 
 import com.example.cloudbees.dto.BookingDetails;
 import io.restassured.RestAssured;

@@ -2,6 +2,7 @@ package com.example.cloudbees.controller;
 
 import com.example.cloudbees.dto.BookingDetails;
 import com.example.cloudbees.dto.SeatDetails;
+import com.example.cloudbees.exception.BookingIdNotFoundException;
 import com.example.cloudbees.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,8 @@ public class BookingController {
     BookingService bookingService;
 
     @GetMapping("/getDetailsById/{bookingId}")
-    public ResponseEntity<BookingDetails> getDetailsById(@PathVariable(name = "bookingId") Long bookingId) {
+    public ResponseEntity<BookingDetails> getDetailsById(@PathVariable(name = "bookingId") Long bookingId)
+            throws BookingIdNotFoundException {
         return ResponseEntity.ok(bookingService.getDetailsById(bookingId));
     }
 

@@ -2,6 +2,7 @@ package com.example.cloudbees.service.impl;
 
 import com.example.cloudbees.dto.BookingDetails;
 import com.example.cloudbees.dto.SeatDetails;
+import com.example.cloudbees.exception.BookingIdNotFoundException;
 import com.example.cloudbees.repo.BookingDetailsRepository;
 import com.example.cloudbees.repo.SeatDetailsRepository;
 import com.example.cloudbees.service.BookingService;
@@ -39,11 +40,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public BookingDetails getDetailsById(Long bookingId) {
+    public BookingDetails getDetailsById(Long bookingId) throws BookingIdNotFoundException {
         Optional<BookingDetails> byId = bookingDetailsRepository.findById(bookingId);
         if (byId.isPresent()) {
             return byId.get();
-        } else throw new RuntimeException("BookingId not found : " + bookingId);
+        } else throw new BookingIdNotFoundException("BookingId not found : " + bookingId);
     }
 
     private int getRandomSeatNumber() {
