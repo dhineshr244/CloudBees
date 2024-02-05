@@ -6,6 +6,8 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class AcceptanceTest {
 
     static final String SERVICE_URL = "http://localhost:8080";
@@ -13,7 +15,7 @@ public class AcceptanceTest {
     @Test
     public void testTicketBook() {
 
-        BookingDetails body = new BookingDetails("Test", "t", "mail", "from", "to", 20);
+        BookingDetails body = new BookingDetails("First", "Name", "mail@gmail.com", "London", "Paris", 20);
 
         BookingDetails bookingDetails = given()
                 .relaxedHTTPSValidation()
@@ -26,7 +28,7 @@ public class AcceptanceTest {
                 .log().all()
                 .statusCode(200)
                 .extract().body().as(BookingDetails.class);
-        System.out.println(bookingDetails);
+        assertEquals("mail@gmail.com", bookingDetails.getEmailId());
     }
 
     protected RequestSpecification given() {

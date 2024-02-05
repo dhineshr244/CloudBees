@@ -6,6 +6,7 @@ import com.example.cloudbees.exception.BookingIdNotFoundException;
 import com.example.cloudbees.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,7 +23,7 @@ public class BookingController {
     }
 
     @PostMapping
-    public ResponseEntity<BookingDetails> bookTicket(@RequestBody BookingDetails bookingDetails) {
+    public ResponseEntity<BookingDetails> bookTicket(@RequestBody @Validated BookingDetails bookingDetails) {
         return ResponseEntity.ok(bookingService.bookTicket(bookingDetails));
     }
 
